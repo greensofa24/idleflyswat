@@ -9,16 +9,18 @@
 <hr style="position: relative; top: 90px;">
 <script>
 var fly = document.createElement("img");
+setInterval(function(){fly.style.left = parseInt(fly.style.left) - 1 + "px"}, 1);
+function createFly(){
 fly.src = "https://greensofa24.github.io/idleflyswat/fly.png";
 fly.width = 50;
-var j = Math.floor(Math.random() * 55 - 25);
 fly.style.position = "relative";
-fly.style.top = j+"px";
-fly.style.left = "600px";
+fly.style.top = Math.floor(Math.random() * 55 - 25) + "px";
+fly.style.left = window.innerWidth - 70 + "px";
 fly.style.rotate = "250deg";
-setInterval(function(){fly.style.left = parseInt(fly.style.left) - 1 + "px"}, 1);
-fly.onclick = function(){this.style.display = 'none'};
+fly.onclick = function(){document.body.removeChild(this); createFly()};
 document.body.appendChild(fly);
+}
+createFly();
 </script>
 </body>
 </html>
