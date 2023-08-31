@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Idle Fly Swat</title>
+</head>
+<body>
+<h1>Idle Fly Swat</h1>
+<hr>
+<hr style="position: relative; top: 90px;">
+<script>
+var fly = document.createElement("img");
+fly.src = "https://greensofa24.github.io/idleflyswat/fly.png";
+fly.width = 50;
+var j = Math.floor(Math.random() * 55 - 25);
+fly.style.position = "relative";
+fly.style.top = j+"px";
+fly.style.left = "600px";
+fly.style.rotate = "250deg";
+setInterval(function(){fly.style.left = parseInt(fly.style.left) - 1 + "px"}, 1);
+fly.onclick = function(){this.style.display = 'none'};
+document.body.appendChild(fly);
+</script>
+</body>
+</html>
