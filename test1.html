@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Idle Fly Swat</title>
+</head>
+<body>
+<h1>Idle Fly Swat</h1>
+<h2>$0</h2>
+
+<script>
+var money = 0;
+var sfly = [];
+setInterval(function(){document.querySelector("h2").innerText = "$" + money}, 10);
+
+function createFlyArea(text){
+p = document.createElement("p");
+p.innerText = text || "Flies";
+hr = document.createElement("hr");
+hrstyle = document.createElement("hr");
+br = document.createElement("br");
+document.body.appendChild(p);
+document.body.appendChild(hr);
+document.body.appendChild(br);
+document.body.appendChild(br.cloneNode());
+document.body.appendChild(br.cloneNode());
+document.body.appendChild(br.cloneNode());
+document.body.appendChild(br.cloneNode());
+document.body.appendChild(hrstyle);
+}
+
+function createFly(src, width, number){
+fly = document.createElement("img");
+fly.src = src || "https://greensofa24.github.io/idleflyswat/fly.png";
+fly.width = width || 50;
+fly.style.position = "relative";
+fly.style.top = Math.floor(Math.random() * 70 - 125) + "px";
+fly.style.left = window.innerWidth - 70 + "px";
+fly.style.rotate = "250deg";
+fly.onclick = function(){document.body.removeChild(fly); createFly(fly.src, fly.width); money += 1; clearInterval(sfly[number])};
+sfly[number] = setInterval(function(){fly.style.left = parseInt(fly.style.left) - 1 + "px"}, 5);
+setInterval(function(){if(fly.style.left <= "-60px"){document.body.removeChild(fly); createFly(fly.src, fly.width); clearInterval(sfly[number]); sfly[number] = null}}, 10);
+document.body.appendChild(fly);
+}
+
+createFlyArea();
+createFly(null, null, 0);
+createFlyArea();
+createFly(null, null, 1);
+</script>
+</body>
+</html>
