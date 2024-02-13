@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Idle Fly Swat</title>
+</head>
+<body>
+<!--<h1>Idle Fly Swat</h1>
+<h2>$0</h2>
+<p>Flies</p>-->
+
+<canvas id="canvas"></canvas>
+<button>click</button>
+<script>
+var money = 0;
+
+const canvas = document.getElementById("canvas");
+canvas.width = innerWidth;
+canvas.height = innerHeight;
+const ctx = canvas.getContext("2d");
+
+setInterval(function(){update()}, 10);
+
+function rect(x, y, width, height, color) {
+this.x = x;
+this.y = y;
+this.width = width;
+this.height = height;
+ctx.fillStyle = color;
+ctx.fillRect(x, y, width, height);
+this.draw = function(){
+ctx.fillStyle = color;
+ctx.fillRect(this.x, this.y, this.width, this.height);
+}
+}
+
+function arc(x, y, radius, color) {
+this.x = x;
+this.y = y;
+this.radius = radius;
+ctx.fillStyle = color;
+ctx.arc(x, y, radius, 0, 2 * Math.PI);
+ctx.fill();
+this.draw = function(){
+ctx.fillStyle = color;
+ctx.beginPath();
+ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+ctx.closePath();
+ctx.fill();
+}
+}
+
+function createFly(link) {
+let img = new Image;
+img.src = link;
+ctx.drawImage(img, 0, 0, 50, 50);
+this.draw = function(){
+let img = new Image;
+img.src = link;
+ctx.drawImage(img, 0, 0, 50, 50);
+}
+}
+
+function update() {
+ctx.clearRect(0, 0, canvas.width, canvas.height);
+fly.draw();
+}
+
+var fly = new createFly("https://greensofa24.github.io/idleflyswat/fly.png");
+</script>
+</body>
+</html>
