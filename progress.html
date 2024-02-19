@@ -9,7 +9,6 @@
 <p>Flies</p>-->
 
 <canvas id="canvas"></canvas>
-<button>click</button>
 <script>
 var money = 0;
 
@@ -50,18 +49,25 @@ ctx.fill();
 }
 
 function createFly(link) {
+this.x = innerWidth;
+this.y = 0;
 let img = new Image;
 img.src = link;
-ctx.drawImage(img, 0, 0, 50, 50);
+ctx.drawImage(img, this.x, this.y, 50, 50);
 this.draw = function(){
 let img = new Image;
 img.src = link;
-ctx.drawImage(img, 0, 0, 50, 50);
+ctx.drawImage(img, this.x, this.y, 50, 50);
 }
 }
 
 function update() {
 ctx.clearRect(0, 0, canvas.width, canvas.height);
+fly.x -= 3;
+if (fly.x <= 0) {
+fly.x = innerWidth;
+fly.y = Math.random() * 100;
+}
 fly.draw();
 }
 
