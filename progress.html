@@ -2,19 +2,27 @@
 <html>
 <head>
 <title>Idle Fly Swat</title>
+<style>
+canvas {
+position: absolute;
+top: 0;
+left: 0;
+}
+</style>
 </head>
 <body>
 <!--<h1>Idle Fly Swat</h1>
 <h2>$0</h2>
 <p>Flies</p>-->
 
-<canvas id="canvas"></canvas>
+<canvas></canvas>
 <script>
 var money = 0;
+var scrollTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
 
-const canvas = document.getElementById("canvas");
+const canvas = document.querySelector("canvas");
 canvas.width = innerWidth;
-canvas.height = innerHeight;
+canvas.height = innerHeight * 10;
 const ctx = canvas.getContext("2d");
 
 setInterval(function(){update()}, 10);
@@ -49,29 +57,44 @@ ctx.fill();
 }
 
 function createFly(link) {
-this.x = innerWidth;
-this.y = 0;
+this.num = flies.length;
+this.x = innerWidth - 20;
+//this.x = innerWidth;
+this.y = Math.random() * 75 + 150 * flies.length + 5;
 let img = new Image;
 img.src = link;
 ctx.drawImage(img, this.x, this.y, 50, 50);
+ctx.moveTo(0, 0 + 150 * flies.length + 5);
+ctx.lineTo(innerWidth, 0 + 150 * flies.length + 5);
+ctx.moveTo(0, 125 + 150 * flies.length + 5);
+ctx.lineTo(innerWidth, 125 + 150 * flies.length + 5);
+ctx.stroke();
 this.draw = function(){
 let img = new Image;
 img.src = link;
 ctx.drawImage(img, this.x, this.y, 50, 50);
+ctx.stroke();
 }
 }
 
 function update() {
 ctx.clearRect(0, 0, canvas.width, canvas.height);
-fly.x -= 3;
-if (fly.x <= 0) {
-fly.x = innerWidth;
-fly.y = Math.random() * 100;
+for (let i in flies) {
+flies[i].x -= 3;
+if (flies[i].x <= 0) {
+flies[i].x = innerWidth;
+flies[i].y = Math.random() * 75 + 150 * flies[i].num + 5;
 }
-fly.draw();
+flies[i].draw();
+}
 }
 
-var fly = new createFly("https://greensofa24.github.io/idleflyswat/fly.png");
+var flies = [];
+flies.push(new createFly("https://greensofa24.github.io/idleflyswat/fly.png"));
+flies.push(new createFly("https://greensofa24.github.io/idleflyswat/fly.png"));
+flies.push(new createFly("https://greensofa24.github.io/idleflyswat/fly.png"));
+flies.push(new createFly("https://greensofa24.github.io/idleflyswat/fly.png"));
+flies.push(new createFly("https://greensofa24.github.io/idleflyswat/fly.png"));
 </script>
 </body>
 </html>
