@@ -61,6 +61,7 @@ this.num = flies.length;
 this.x = innerWidth - 20;
 //this.x = innerWidth;
 this.y = Math.random() * 75 + 150 * flies.length + 5;
+this.visible = true;
 let img = new Image;
 img.src = link;
 ctx.drawImage(img, this.x, this.y, 50, 50);
@@ -80,6 +81,7 @@ ctx.stroke();
 function update() {
 ctx.clearRect(0, 0, canvas.width, canvas.height);
 for (let i in flies) {
+if (flies[i].visible) {
 flies[i].x -= 3;
 if (flies[i].x <= 0) {
 flies[i].x = innerWidth;
@@ -88,6 +90,15 @@ flies[i].y = Math.random() * 75 + 150 * flies[i].num + 5;
 flies[i].draw();
 }
 }
+}
+
+canvas.addEventListener("click", (event) => {
+for (let i in flies) {
+if (flies[i].x >= event.offsetX && flies[i].x <= event.offsetX + 50 && flies[i].y >= event.offsetY && flies[i].y <= event.offsetY + 50) {
+flies[i].visible = false;
+}
+}
+});
 
 var flies = [];
 flies.push(new createFly("https://greensofa24.github.io/idleflyswat/fly.png"));
